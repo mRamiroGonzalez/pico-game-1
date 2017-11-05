@@ -21,9 +21,7 @@ function _draw()
     end
   end
   spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
-
-  -- for b in all(blocks_to_check_h) do spr(1, b.x, b.y, 1, 1) end
-  -- for b in all(blocks_to_check_v) do spr(1, b.x, b.y, 1, 1) end
+  
   print_debug()
 end
 
@@ -40,6 +38,12 @@ function _update()
       update_gravity(e)
       if e.ai == 'endless' then
         walk_endless(e)
+      end
+      if is_below_map(e) then
+        e.x = 60
+        e.y = 0
+        if (e.h_speed <= 6) e.h_speed = e.h_speed + 1
+        e.mvt_h = 0
       end
     elseif e.entity_type == 'torch' then
       update_anim_torch(e, 2)

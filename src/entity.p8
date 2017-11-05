@@ -76,3 +76,7 @@ end
 function is_in_front_of_a_block(e)
   return get_block_in_front(e, 0)
 end
+
+function is_below_map(e)
+  return e.y > 128
+end
