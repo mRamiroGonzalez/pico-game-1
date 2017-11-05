@@ -52,3 +52,27 @@ function move_y(e)
     e.dy = 1
   end
 end
+
+function update_shot_simple(s)
+  s.dx = 0
+  if s.facing == 1 then
+    s.dx = s.h_speed
+    s.mvt_h = 1
+  else
+    s.dx = -s.h_speed
+    s.mvt_h = -1
+  end
+
+  h_col = box_collide_h(s)
+  
+  if (s.x % 8 != 0) and h_col then
+    if(s.mvt_h == 1) s.x += 8 - (s.x % 8)
+    if(s.mvt_h == -1) s.x -= (s.x % 8)
+  end
+
+  if h_col then
+    del(shots, s)
+  else
+    s.x += s.dx
+  end
+end

@@ -88,3 +88,16 @@ function entity_collision(e1, e2)
   end
   return collide
 end
+
+function shot_collision(s, e)
+  local collide = true
+  r1 = sp_to_rect(s)
+  r2 = sp_to_rect(e)
+  if(r1.x1 > r2.x2-4) or 
+    (r2.x1 > r1.x2-4) or 
+    (r1.y1 > r2.y2-4) or 
+    (r2.y1 > r1.y2-4) then
+    collide = false
+  end
+  return collide
+end

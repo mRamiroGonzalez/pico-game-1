@@ -1,9 +1,10 @@
 function _init()
   counter = 0
   entities = {}
+  shots = {}
   level = 0
 
-  p = init_entity(60, 40, 2, 16, 6, 'player', 'stupid', 7)
+  p = init_entity(60, 40, 2, 16, 6, 'player', 'stupid', 7, 1)
   load_entities(entities)
 end
 
@@ -20,6 +21,12 @@ function _draw()
       spr(e.base_anim.f, e.x, e.y, 1, 1, (e.facing == 0))
     end
   end
+
+  for s in all(shots) do
+    if s.entity_type == 'shot' then
+      spr(s.base_anim.f, s.x, s.y, 1, 1)
+    end
+  end
   spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
   draw_life(p)
 
@@ -34,7 +41,7 @@ function _update()
 
   update_gravity(p)
   update_from_controls(p)
-  
+
   for e in all(entities) do
     if e.entity_type == 'bad' then
       update_gravity(e)
@@ -56,6 +63,21 @@ function _update()
       update_anim_torch(e, 2)
     elseif e.entity_type == 'torch_small' then
       update_anim_torch(e, 1)
+    end
+  end
+
+  for s in all(shots) do
+    if s.ai == 'simple' then
+      update_shot_simple(s)
+    end
+    for e in all(entities) do
+      if e.entity_type == 'bad' then
+        if shot_collision(s, e) then
+          e.life -= 1
+        if(e.life == 0) del(entities, e)
+          del(shots, s)
+      end
+      end
     end
   end
 end

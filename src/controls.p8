@@ -66,3 +66,10 @@ end
 function no_horizontal_input()
   return not (btn(0) or btn(1))
 end
+
+function shot_control(p)
+  if (btnp(4)) then
+    add(shots, init_entity(p.x, p.y, 4, 26, 1, 'shot', 'simple', 1, p.facing))
+    sfx(3)
+  end
+end

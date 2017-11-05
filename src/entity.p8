@@ -2,10 +2,10 @@ function load_entities(entities)
   for xi = 0, 15, 1 do
     for yi = 0, 15, 1 do
       if(mget(xi, yi) == 137) then
-        add(entities, init_entity(xi*8, yi*8, 0, 74, 2,'torch','dumb'))
+        add(entities, init_entity(xi*8, yi*8, 0, 74, 2,'torch','dumb', 0))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 136) then
-        add(entities, init_entity(xi*8, yi*8, 0, 124, 1,'torch_small','dumb'))
+        add(entities, init_entity(xi*8, yi*8, 0, 124, 1,'torch_small','dumb', 0))
         mset(xi, yi, 80)
       end
     end
@@ -18,19 +18,19 @@ function load_ennemies(loaded_map, entities)
     for yi = loaded_map.y1, loaded_map.y2, 1 do
       if(mget(xi, yi) == 128) then
         -- classic zombie
-        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2))
+        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2, 1))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 129) then
         -- snake
-        add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1))
+        add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1, 1))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 130) then
         -- mimic
-        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3))
+        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3, 1))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 131) then
         -- small zombie
-        add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1))
+        add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1, 1))
         mset(xi, yi, 80)
       end
     end
@@ -45,7 +45,7 @@ function create_random_entities()
   end
 end
 
-function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, ai, life)
+function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, ai, life, facing)
   return {
     ai = ai,
     entity_type = t,
@@ -55,7 +55,7 @@ function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, a
     w = 8, h = 8,
     mvt_h = 0,
     mvt_v = 0,
-    facing = 1,
+    facing = facing,
     v_speed = 4,
     h_speed = speed,
     jumping = false,
@@ -84,6 +84,7 @@ end
 function update_from_controls(p)
   horizontal_controls(p)
   vertical_controls(p)
+  shot_control(p)
 end
 
 function is_on_a_solid_block(e)
