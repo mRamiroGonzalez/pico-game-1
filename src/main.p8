@@ -21,7 +21,7 @@ function _draw()
     end
   end
   spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
-  
+
   print_debug()
 end
 

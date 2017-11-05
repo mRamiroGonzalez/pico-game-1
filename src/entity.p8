@@ -13,16 +13,30 @@ function load_entities(entities)
 end
 
 function load_ennemies(loaded_map, entities)
+  create_random_entities()
   for xi = loaded_map.x1, loaded_map.x2, 1 do
     for yi = loaded_map.y1, loaded_map.y2, 1 do
       if(mget(xi, yi) == 128) then
         add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless'))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 129) then
-        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','follow'))
+        add(entities, init_entity(xi*8, yi*8, 1, 32, 4,'bad','endless'))
+        mset(xi, yi, 80)
+      elseif(mget(xi, yi) == 130) then
+        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless'))
+        mset(xi, yi, 80)
+      elseif(mget(xi, yi) == 131) then
+        add(entities, init_entity(xi*8, yi*8, 1, 53, 4,'bad','endless'))
         mset(xi, yi, 80)
       end
     end
+  end
+end
+
+function create_random_entities()
+  if(counter % 300 == 0)then
+    ennemy = 128 + rnd(4)
+    mset(7,0,ennemy)
   end
 end
 
