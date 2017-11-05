@@ -28,6 +28,7 @@ end
 
 function _update()
   counter += 1
+  if (p.shield > 0) p.shield -= 1
 
   load_ennemies(loaded_map(p, level), entities)
 
@@ -45,6 +46,10 @@ function _update()
         e.y = 0
         if (e.h_speed <= 6) e.h_speed = e.h_speed + 1
         e.mvt_h = 0
+      end
+      if entity_collision(e, p) and (p.shield == 0) then
+        p.life -= 1
+        p.shield = 60
       end
     elseif e.entity_type == 'torch' then
       update_anim_torch(e, 2)

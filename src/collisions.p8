@@ -1,4 +1,3 @@
-
 function check_collision(blocks_to_check, e)
   local collide = true
   local solid = false
@@ -75,4 +74,17 @@ function blocks_below(e, blocks_to_check)
   add(blocks_to_check, block(e.x, e.y + e.h))
   if ((e.x % e.w) != 0) add (blocks_to_check, block(e.x + e.w, e.y + e.h))
   return blocks_to_check
+end
+
+function entity_collision(e1, e2)
+  local collide = true
+  r1 = sp_to_rect(e1)
+  r2 = sp_to_rect(e2)
+  if(r1.x1 > r2.x2) or 
+    (r2.x1 > r1.x2) or 
+    (r1.y1 > r2.y2) or 
+    (r2.y1 > r1.y2) then
+    collide = false
+  end
+  return collide
 end

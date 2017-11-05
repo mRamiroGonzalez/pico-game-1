@@ -6,6 +6,7 @@ function print_debug()
   end
   print('cpu: '..(cpu or 0)..'%', 0, 1, 0)  
   print('ram: '..(ram or 0)..'/1024', 0, 8, 0)
+  print(p.shield, 0, 15, 0)
   -- print(count(entities), 0, 15, 0)
 
   -- for b in all(blocks_to_check_h) do spr(1, b.x, b.y, 1, 1) end

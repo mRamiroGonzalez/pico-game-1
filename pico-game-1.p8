@@ -167,6 +167,19 @@ if ((e.x % e.w) != 0) add (blocks_to_check, block(e.x + e.w, e.y + e.h))
 return blocks_to_check
 end
 
+function entity_collision(e1, e2)
+local collide = true
+r1 = sp_to_rect(e1)
+r2 = sp_to_rect(e2)
+if(r1.x1 > r2.x2) or
+(r2.x1 > r1.x2) or
+(r1.y1 > r2.y2) or
+(r2.y1 > r1.y2) then
+collide = false
+end
+return collide
+end
+
 function vertical_controls(p)
 if btnp(2) and not p.jumping and not p.falling then
 p.dy = p.jump_initial_speed
@@ -269,7 +282,7 @@ end
 end
 
 function create_random_entities()
-if(counter % 300 == 0)then
+if(counter % 100 == 0)then
 ennemy = 128 + rnd(4)
 mset(7,0,ennemy)
 end
@@ -293,6 +306,7 @@ falling = true,
 jump_initial_speed = -7,
 gravity = 1,
 life = life,
+shield = 0,
 base_anim={f=start_sprite, st=start_sprite, sz=start_sprite+length_sprites, fix=start_sprite}
 }
 end
@@ -338,6 +352,7 @@ ram = stat(0)
 end
 print('cpu: '..(cpu or 0)..'%', 0, 1, 0)
 print('ram: '..(ram or 0)..'/1024', 0, 8, 0)
+print(p.shield, 0, 15, 0)
 
 end
 
@@ -386,6 +401,7 @@ end
 
 function _update()
 counter += 1
+if (p.shield > 0) p.shield -= 1
 
 load_ennemies(loaded_map(p, level), entities)
 
@@ -403,6 +419,10 @@ e.x = 60
 e.y = 0
 if (e.h_speed <= 6) e.h_speed = e.h_speed + 1
 e.mvt_h = 0
+end
+if entity_collision(e, p) and (p.shield == 0) then
+p.life -= 1
+p.shield = 60
 end
 elseif e.entity_type == 'torch' then
 update_anim_torch(e, 2)
@@ -730,5 +750,11 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
+
+
+
+
+
 
 

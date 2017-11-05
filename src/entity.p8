@@ -38,7 +38,7 @@ function load_ennemies(loaded_map, entities)
 end
 
 function create_random_entities()
-  if(counter % 300 == 0)then
+  if(counter % 100 == 0)then
     ennemy = 128 + rnd(4)
     mset(7,0,ennemy)
   end
@@ -62,6 +62,7 @@ function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, a
     jump_initial_speed = -7,
     gravity = 1,
     life = life,
+    shield = 0,
     base_anim={f=start_sprite, st=start_sprite, sz=start_sprite+length_sprites, fix=start_sprite}
   }
 end
