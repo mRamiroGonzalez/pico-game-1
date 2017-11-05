@@ -49,7 +49,8 @@ function _update()
       end
       if entity_collision(e, p) and (p.shield == 0) then
         p.life -= 1
-        p.shield = 60
+        p.shield = 30
+        sfx(0)
       end
     elseif e.entity_type == 'torch' then
       update_anim_torch(e, 2)

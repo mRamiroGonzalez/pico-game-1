@@ -41,6 +41,7 @@ function create_random_entities()
   if(counter % 100 == 0)then
     ennemy = 128 + rnd(4)
     mset(7,0,ennemy)
+    sfx(1)
   end
 end
 

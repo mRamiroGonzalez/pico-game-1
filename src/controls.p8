@@ -4,6 +4,7 @@ function vertical_controls(p)
     p.dy = p.jump_initial_speed
     p.jumping = true
     p.mvt_v = -1
+    sfx(2)
   end 
   
   v_col = box_collide_v(p)
