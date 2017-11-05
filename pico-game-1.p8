@@ -36,42 +36,6 @@ anim(e.base_anim, 0.2)
 end
 end
 
-function follow_player(e,p)
-follow_x(e,p)
-move_y(e,p)
-end
-
-function follow_x(e, p)
-e.dx = 0
-
-if (e.x < p.x) then
-e.dx = e.h_speed
-e.mvt_h = 1
-e.facing = 1
-elseif (e.x > p.x) then
-e.dx = -e.h_speed
-e.mvt_h = -1
-e.facing = 0
-else
-e.base_anim.f = e.base_anim.fix
-e.dx = 0
-end
-
-h_col = box_collide_h(e)
-
-if (e.x % 8 != 0) and h_col then
-if(e.mvt_h == 1) e.x += 8 - (e.x % 8)
-if(e.mvt_h == -1) e.x -= (e.x % 8)
-end
-
-if h_col then
-e.base_anim.f = e.base_anim.fix
-else
-e.x += e.dx
-anim(e.base_anim, 0.35)
-end
-end
-
 function move_y(e)
 v_col = box_collide_v(e)
 
@@ -335,8 +299,6 @@ ram = stat(0)
 end
 print('cpu: '..(cpu or 0)..'%', 0, 1, 0)
 print('ram: '..(ram or 0)..'/1024', 0, 8, 0)
-print(count(entities), 0, 15, 0)
-print(p.falling, 0, 22,0)
 end
 
 function sp_to_rect(e)
@@ -394,8 +356,6 @@ if e.entity_type == 'bad' then
 update_gravity(e)
 if e.ai == 'endless' then
 walk_endless(e)
-elseif e.ai == 'follow' then
-follow_player(e, p)
 end
 elseif e.entity_type == 'torch' then
 update_anim_torch(e, 2)
@@ -723,6 +683,10 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
+
+
+
 
 
 

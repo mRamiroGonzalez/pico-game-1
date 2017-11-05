@@ -40,8 +40,6 @@ function _update()
       update_gravity(e)
       if e.ai == 'endless' then
         walk_endless(e)
-      elseif e.ai == 'follow' then
-        follow_player(e, p)
       end
     elseif e.entity_type == 'torch' then
       update_anim_torch(e, 2)
