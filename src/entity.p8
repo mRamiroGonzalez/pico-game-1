@@ -17,16 +17,20 @@ function load_ennemies(loaded_map, entities)
   for xi = loaded_map.x1, loaded_map.x2, 1 do
     for yi = loaded_map.y1, loaded_map.y2, 1 do
       if(mget(xi, yi) == 128) then
-        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless'))
+        -- classic zombie
+        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 129) then
-        add(entities, init_entity(xi*8, yi*8, 1, 32, 4,'bad','endless'))
+        -- snake
+        add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 130) then
-        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless'))
+        -- mimic
+        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 131) then
-        add(entities, init_entity(xi*8, yi*8, 1, 53, 4,'bad','endless'))
+        -- small zombie
+        add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1))
         mset(xi, yi, 80)
       end
     end
@@ -40,7 +44,7 @@ function create_random_entities()
   end
 end
 
-function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, ai)
+function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, ai, life)
   return {
     ai = ai,
     entity_type = t,
@@ -57,6 +61,7 @@ function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, a
     falling = true,
     jump_initial_speed = -7,
     gravity = 1,
+    life = life,
     base_anim={f=start_sprite, st=start_sprite, sz=start_sprite+length_sprites, fix=start_sprite}
   }
 end

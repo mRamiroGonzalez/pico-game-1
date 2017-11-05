@@ -3,7 +3,7 @@ function _init()
   entities = {}
   level = 0
 
-  p = init_entity(60, 40, 2, 16, 6)
+  p = init_entity(60, 40, 2, 16, 6, 'player', 'stupid', 7)
   load_entities(entities)
 end
 
@@ -21,6 +21,7 @@ function _draw()
     end
   end
   spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
+  draw_life(p)
 
   print_debug()
 end
