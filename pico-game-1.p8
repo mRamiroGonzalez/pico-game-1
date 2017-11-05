@@ -184,7 +184,7 @@ return blocks_to_check
 end
 
 function vertical_controls(p)
-if btnp(2) and not p.jumping then
+if btnp(2) and not p.jumping and not p.falling then
 p.dy = p.jump_initial_speed
 p.jumping = true
 p.mvt_v = -1
@@ -197,9 +197,13 @@ if(p.mvt_v == -1) p.y -= (p.y % 8)
 if(p.mvt_v == 1) p.y += 8 - (p.y % 8)
 end
 
-if (not (v_col)) p.y += p.dy
+if (not (v_col)) then
+p.y += p.dy
+p.falling = true
+end
 
 if (is_on_a_solid_block(p)) then
+p.falling = false
 p.jumping = false
 p.dy = 0
 p.mvt_v = 0
@@ -287,6 +291,7 @@ facing = 1,
 v_speed = 4,
 h_speed = speed,
 jumping = false,
+falling = true,
 jump_initial_speed = -7,
 gravity = 1,
 base_anim={f=start_sprite, st=start_sprite, sz=start_sprite+length_sprites, fix=start_sprite}
@@ -314,9 +319,11 @@ end
 function is_on_a_solid_block(e)
 return get_block_below(e, 0)
 end
+
 function is_below_a_solid_block(e)
 return get_block_on_top(e, 0)
 end
+
 function is_in_front_of_a_block(e)
 return get_block_in_front(e, 0)
 end
@@ -329,7 +336,7 @@ end
 print('cpu: '..(cpu or 0)..'%', 0, 1, 0)
 print('ram: '..(ram or 0)..'/1024', 0, 8, 0)
 print(count(entities), 0, 15, 0)
-
+print(p.falling, 0, 22,0)
 end
 
 function sp_to_rect(e)
@@ -352,7 +359,7 @@ counter = 0
 entities = {}
 level = 0
 
-p = init_entity(76, 64, 2, 16, 6)
+p = init_entity(60, 40, 2, 16, 6)
 load_entities(entities)
 end
 
@@ -716,4 +723,20 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

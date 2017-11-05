@@ -1,6 +1,6 @@
 
 function vertical_controls(p)
-  if btnp(2) and not p.jumping then
+  if btnp(2) and not p.jumping and not p.falling then
     p.dy = p.jump_initial_speed
     p.jumping = true
     p.mvt_v = -1
@@ -13,9 +13,13 @@ function vertical_controls(p)
     if(p.mvt_v == 1) p.y += 8 - (p.y % 8)
   end
 
-  if (not (v_col)) p.y += p.dy
+  if (not (v_col)) then
+    p.y += p.dy
+    p.falling = true
+  end
 
-  if (is_on_a_solid_block(p)) then 
+  if (is_on_a_solid_block(p)) then
+    p.falling = false 
     p.jumping = false
     p.dy = 0
     p.mvt_v = 0

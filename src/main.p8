@@ -3,7 +3,7 @@ function _init()
   entities = {}
   level = 0
 
-  p = init_entity(76, 64, 2, 16, 6)
+  p = init_entity(60, 40, 2, 16, 6)
   load_entities(entities)
 end
 

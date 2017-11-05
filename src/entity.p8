@@ -40,6 +40,7 @@ function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, a
     v_speed = 4,
     h_speed = speed,
     jumping = false,
+    falling = true,
     jump_initial_speed = -7,
     gravity = 1,
     base_anim={f=start_sprite, st=start_sprite, sz=start_sprite+length_sprites, fix=start_sprite}
