@@ -312,31 +312,38 @@ end
 end
 end
 
-function load_ennemies(loaded_map, entities)
-create_random_entities()
+function load_ennemies(loaded_map, entities, spawns)
+local random = rnd(1)
+local facing = 0
+
+if (random > 0.5) facing = 1
+
+create_random_entities(spawns)
 for xi = loaded_map.x1, loaded_map.x2, 1 do
 for yi = loaded_map.y1, loaded_map.y2, 1 do
 if(mget(xi, yi) == 128) then
-add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2, 1))
+add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2, facing))
 mset(xi, yi, 80)
 elseif(mget(xi, yi) == 129) then
-add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1, 1))
+add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1, facing))
 mset(xi, yi, 80)
 elseif(mget(xi, yi) == 130) then
-add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3, 1))
+add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3, facing))
 mset(xi, yi, 80)
 elseif(mget(xi, yi) == 131) then
-add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1, 1))
+add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1, facing))
 mset(xi, yi, 80)
 end
 end
 end
 end
 
-function create_random_entities()
+function create_random_entities(spawns)
+local tile = spawns[flr(rnd(count(spawns))+1)]
+
 if(counter % 100 == 0)then
-ennemy = 128 + rnd(4)
-mset(7,0,ennemy)
+ennemy = 128 + flr(rnd(4))
+mset(tile,0,ennemy)
 sfx(1)
 end
 end
@@ -429,7 +436,11 @@ function _init()
 counter = 0
 entities = {}
 shots = {}
-level = 0
+
+levels = {}
+current_level = 1
+add(levels, {map_offset = 0, spawns = {7, 8}})
+
 score = 0
 
 p = init_entity(60, 40, 2, 16, 5, 'player', 'stupid', 5, 1)
@@ -465,7 +476,10 @@ function _update()
 counter += 1
 if (p.shield > 0) p.shield -= 1
 
-load_ennemies(loaded_map(p, level), entities)
+local map_offset = levels[current_level].map_offset
+local spawn_tab = levels[current_level].spawns
+
+load_ennemies(loaded_map(p, map_offset), entities, spawn_tab)
 
 update_gravity(p)
 update_from_controls(p)
@@ -831,6 +845,27 @@ __music__
 00 00000000
 00 00000000
 00 00000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

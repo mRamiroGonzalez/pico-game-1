@@ -12,35 +12,42 @@ function load_entities(entities)
   end
 end
 
-function load_ennemies(loaded_map, entities)
-  create_random_entities()
+function load_ennemies(loaded_map, entities, spawns)
+  local random = rnd(1)
+  local facing = 0
+
+  if (random > 0.5) facing = 1
+  
+  create_random_entities(spawns)
   for xi = loaded_map.x1, loaded_map.x2, 1 do
     for yi = loaded_map.y1, loaded_map.y2, 1 do
       if(mget(xi, yi) == 128) then
         -- classic zombie
-        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2, 1))
+        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2, facing))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 129) then
         -- snake
-        add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1, 1))
+        add(entities, init_entity(xi*8, yi*8, 2, 32, 4,'bad','endless', 1, facing))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 130) then
         -- mimic
-        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3, 1))
+        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3, facing))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 131) then
         -- small zombie
-        add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1, 1))
+        add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1, facing))
         mset(xi, yi, 80)
       end
     end
   end
 end
 
-function create_random_entities()
+function create_random_entities(spawns)
+  local tile = spawns[flr(rnd(count(spawns))+1)]
+
   if(counter % 100 == 0)then
-    ennemy = 128 + rnd(4)
-    mset(7,0,ennemy)
+    ennemy = 128 + flr(rnd(4))
+    mset(tile,0,ennemy)
     sfx(1)
   end
 end

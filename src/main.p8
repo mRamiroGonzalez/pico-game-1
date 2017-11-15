@@ -2,7 +2,11 @@ function _init()
   counter = 0
   entities = {}
   shots = {}
-  level = 0
+  
+  levels = {}
+  current_level = 1
+  add(levels, {map_offset = 0, spawns = {7, 8}})
+
   score = 0
 
   p = init_entity(60, 40, 2, 16, 5, 'player', 'stupid', 5, 1)
@@ -38,7 +42,10 @@ function _update()
   counter += 1
   if (p.shield > 0) p.shield -= 1
 
-  load_ennemies(loaded_map(p, level), entities)
+  local map_offset = levels[current_level].map_offset
+  local spawn_tab = levels[current_level].spawns
+
+  load_ennemies(loaded_map(p, map_offset), entities, spawn_tab)
 
   update_gravity(p)
   update_from_controls(p)
