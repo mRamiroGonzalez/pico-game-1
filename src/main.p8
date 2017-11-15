@@ -2,10 +2,9 @@ function _init()
   counter = 0
   entities = {}
   shots = {}
-  
-  levels = {}
-  current_level = 1
-  add(levels, {map_offset = 0, spawns = {7, 8}})
+
+  current_level = 1  
+  levels = load_levels()
 
   score = 0
 

@@ -432,14 +432,33 @@ for k,v in pairs(from) do copy[k] = v end
 return copy
 end
 
+function load_levels()
+local levels_list = {}
+
+local level_1 = {
+map_offset = 0,
+spawns = {7, 8},
+max_score = 50
+}
+
+local level_2 = {
+map_offset = 1,
+spawns = {3, 11},
+max_score = 100
+}
+
+add(levels_list, level_1)
+add(levels_list, level_2)
+
+return levels_list
+end
 function _init()
 counter = 0
 entities = {}
 shots = {}
 
-levels = {}
 current_level = 1
-add(levels, {map_offset = 0, spawns = {7, 8}})
+levels = load_levels()
 
 score = 0
 
@@ -845,6 +864,7 @@ __music__
 00 00000000
 00 00000000
 00 00000000
+
 
 
 
