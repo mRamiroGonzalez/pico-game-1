@@ -21,22 +21,22 @@ function draw_life(p)
 
   for j=0, nb_full-1, 1 do
     if(p.shield > 0) then
-      spr(6, 78 + 8*heart_offset, 0)
+      spr(6, 80 + 8*heart_offset, 0)
     else
-      spr(22, 78 + 8*heart_offset, 0)
+      spr(22, 80 + 8*heart_offset, 0)
     end
     heart_offset += 1
   end
   for j=0, nb_half-1, 1 do
     if(p.shield > 0) then
-      spr(7, 78 + 8*heart_offset, 0)
+      spr(7, 80 + 8*heart_offset, 0)
     else
-      spr(23, 78 + 8*heart_offset, 0)
+      spr(23, 80 + 8*heart_offset, 0)
     end
     heart_offset += 1
   end
   for j=0, nb_empty-1, 1 do
-    spr(24, 78 + 8*heart_offset, 0)
+    spr(24, 80 + 8*heart_offset, 0)
     heart_offset += 1
   end
 end
