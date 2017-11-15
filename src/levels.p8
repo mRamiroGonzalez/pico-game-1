@@ -2,15 +2,19 @@ function load_levels()
   local levels_list = {}
 
   local level_1 = {
-    map_offset = 0, 
+    id = 1,
+    map_offset = {x = 0, y = 0}, 
     spawns = {7, 8},
-    max_score = 50
+    max_score = 10,
+    starting_point = {x = 40, y = 60}
   }
 
   local level_2 = {
-    map_offset = 1,
-    spawns = {3, 11},
-    max_score = 100
+    id = 2,
+    map_offset = {x = 1, y = 0},
+    spawns = {17, 30},
+    max_score = 15,
+    starting_point = {x = 168, y = 60}
   }
 
   add(levels_list, level_1)

@@ -43,13 +43,17 @@ function load_ennemies(loaded_map, entities, spawns)
 end
 
 function create_random_entities(spawns)
-  local tile = spawns[flr(rnd(count(spawns))+1)]
+  local tile = get_random_tile_from_table(spawns)
 
   if(counter % 100 == 0)then
     ennemy = 128 + flr(rnd(4))
     mset(tile,0,ennemy)
     sfx(1)
   end
+end
+
+function get_random_tile_from_table(table)
+  return table[flr(rnd(count(table))+1)]
 end
 
 function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, ai, life, facing)
