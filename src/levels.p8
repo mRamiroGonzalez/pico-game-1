@@ -12,7 +12,7 @@ function load_levels()
   local level_2 = {
     id = 2,
     map_offset = {x = 1, y = 0},
-    spawns = {17, 30},
+    spawns = {18, 29},
     max_score = 15,
     starting_point = {x = 168, y = 60}
   }

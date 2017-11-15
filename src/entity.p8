@@ -1,6 +1,11 @@
-function load_entities(entities)
-  for xi = 0, 15, 1 do
-    for yi = 0, 15, 1 do
+function load_entities(entities, map_offset)
+  local x1 = map_offset.x * 15
+  local x2 = (map_offset.x * 15) + 15
+  local y1 = map_offset.y * 15
+  local y2 = (map_offset.y * 15) + 15
+
+  for xi = x1, x2, 1 do
+    for yi = y1, y2, 1 do
       if(mget(xi, yi) == 137) then
         add(entities, init_entity(xi*8, yi*8, 0, 74, 2,'torch','dumb', 0))
         mset(xi, yi, 80)

@@ -9,7 +9,7 @@ function _init()
   current_level = levels[1]
 
   p = init_entity(current_level.starting_point.x, current_level.starting_point.y, 2, 16, 5, 'player', 'stupid', 10, 1)
-  load_entities(entities)
+  load_entities(entities, current_level.map_offset)
 end
 
 function _draw()
@@ -47,6 +47,7 @@ function _update()
     shots = {}
     p.x = current_level.starting_point.x
     p.y = current_level.starting_point.y
+    load_entities(entities, current_level.map_offset)
   end
 
   counter += 1
