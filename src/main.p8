@@ -8,7 +8,7 @@ function _init()
   levels = load_levels()
   current_level = levels[1]
 
-  p = init_entity(current_level.starting_point.x, current_level.starting_point.y, 2, 16, 5, 'player', 'stupid', 5, 1)
+  p = init_entity(current_level.starting_point.x, current_level.starting_point.y, 2, 16, 5, 'player', 'stupid', 10, 1)
   load_entities(entities)
 end
 
