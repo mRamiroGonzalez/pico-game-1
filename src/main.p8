@@ -3,8 +3,9 @@ function _init()
   entities = {}
   shots = {}
   level = 0
+  score = 0
 
-  p = init_entity(60, 40, 2, 16, 6, 'player', 'stupid', 7, 1)
+  p = init_entity(60, 40, 2, 16, 5, 'player', 'stupid', 5, 1)
   load_entities(entities)
 end
 
@@ -54,7 +55,7 @@ function _update()
         if (e.h_speed <= 6) e.h_speed = e.h_speed + 1
         e.mvt_h = 0
       end
-      if entity_collision(e, p) and (p.shield == 0) then
+      if entity_collision(e, p) and (p.shield == 0) and (p.life > 0) then
         p.life -= 1
         p.shield = 30
         sfx(0)
@@ -74,8 +75,11 @@ function _update()
       if e.entity_type == 'bad' then
         if shot_collision(s, e) then
           e.life -= 1
-        if(e.life == 0) del(entities, e)
-          del(shots, s)
+        if(e.life == 0) then
+          score += e.h_speed 
+          del(entities, e)
+        end
+        del(shots, s)
       end
       end
     end

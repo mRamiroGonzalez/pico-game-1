@@ -6,7 +6,7 @@ function print_debug()
   end
   print('cpu: '..(cpu or 0)..'%', 0, 1, 0)  
   print('ram: '..(ram or 0)..'/1024', 0, 8, 0)
-  print('score: ', 0, 122, 11)
+  print(score..'/50', 0, 122, 11)
   -- print(p.facing, 0, 15, 0)
   -- print(count(entities), 0, 15, 0)
 
