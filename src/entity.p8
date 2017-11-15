@@ -1,3 +1,40 @@
+function update_entity(e)
+  if e.entity_type == 'bad' then
+    update_gravity(e)
+    if e.ai == 'endless' then
+      walk_endless(e)
+    end
+    if is_below_map(e) then
+      e.x = get_random_tile_from_table(current_level.spawns) * 8
+      e.y = 0
+      if (e.h_speed <= 6) e.h_speed = e.h_speed + 1
+      e.mvt_h = 0
+    end
+    if entity_collision(e, p) and (p.shield == 0) and (p.life > 0) then
+      p.life -= 1
+      p.shield = 30
+      sfx(0)
+    end
+  elseif e.entity_type == 'torch' then
+    update_anim_torch(e, 2)
+  elseif e.entity_type == 'torch_small' then
+    update_anim_torch(e, 1)
+  end
+end
+
+function update_collision_shot_entity(s, e)
+  if e.entity_type == 'bad' then
+    if shot_collision(s, e) then
+      e.life -= 1
+      if(e.life == 0) then
+        score += e.h_speed 
+        del(entities, e)
+      end
+      del(shots, s)
+    end
+  end
+end
+
 function load_entities(entities, map_offset)
   local x1 = map_offset.x * 15
   local x2 = (map_offset.x * 15) + 15

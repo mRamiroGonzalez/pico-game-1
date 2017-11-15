@@ -18,6 +18,28 @@ function print_score(score, score_max)
   print(score..'/'..score_max, 1 + offset_x, 122, 11)
 end
 
+function draw_entities(p, entities)
+  spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
+
+  for e in all(entities) do
+    if (e.entity_type == 'torch') then
+      spr(e.base_anim.f, e.x, e.y, 2, 2)
+    elseif (e.entity_type == 'torch_small') then
+      spr(e.base_anim.f, e.x, e.y, 1, 1)
+    elseif e.entity_type == 'bad' then
+      spr(e.base_anim.f, e.x, e.y, 1, 1, (e.facing == 0))
+    end
+  end
+end
+
+function draw_shots(shots)
+  for s in all(shots) do
+    if s.entity_type == 'shot' then
+      spr(s.base_anim.f, s.x, s.y, 1, 1)
+    end
+  end
+end
+
 function draw_life(p)
   local nb_full = p.life / 2
   local nb_half = p.life % 2

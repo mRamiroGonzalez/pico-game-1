@@ -22,3 +22,12 @@ function load_levels()
   
   return levels_list
 end
+
+function next_level()
+  current_level = levels[current_level.id+1]
+  entities = {}
+  shots = {}
+  p.x = current_level.starting_point.x
+  p.y = current_level.starting_point.y
+  load_entities(entities, current_level.map_offset)
+end
