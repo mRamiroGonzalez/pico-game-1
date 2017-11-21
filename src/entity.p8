@@ -65,7 +65,7 @@ function load_ennemies(loaded_map, entities, spawns)
     for yi = loaded_map.y1, loaded_map.y2, 1 do
       if(mget(xi, yi) == 128) then
         -- classic zombie
-        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 2, facing))
+        add(entities, init_entity(xi*8, yi*8, 1, 48, 4,'bad','endless', 1, facing))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 129) then
         -- snake
@@ -73,7 +73,7 @@ function load_ennemies(loaded_map, entities, spawns)
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 130) then
         -- mimic
-        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 3, facing))
+        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 1, facing))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 131) then
         -- small zombie

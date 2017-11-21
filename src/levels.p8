@@ -5,7 +5,7 @@ function load_levels()
     id = 1,
     map_offset = {x = 0, y = 0}, 
     spawns = {7, 8},
-    max_score = 1,
+    max_score = 10,
     starting_point = {x = 40, y = 60}
   }
 
@@ -13,7 +13,7 @@ function load_levels()
     id = 2,
     map_offset = {x = 1, y = 0},
     spawns = {18, 29},
-    max_score = 15,
+    max_score = 20,
     starting_point = {x = 168, y = 60}
   }
 
