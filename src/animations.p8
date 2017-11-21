@@ -19,8 +19,6 @@ function print_score(score, score_max)
 end
 
 function draw_entities(p, entities)
-  spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
-
   for e in all(entities) do
     if (e.entity_type == 'torch') then
       spr(e.base_anim.f, e.x, e.y, 2, 2)
@@ -30,6 +28,7 @@ function draw_entities(p, entities)
       spr(e.base_anim.f, e.x, e.y, 1, 1, (e.facing == 0))
     end
   end
+  spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
 end
 
 function draw_shots(shots)

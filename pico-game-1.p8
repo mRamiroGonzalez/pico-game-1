@@ -100,8 +100,6 @@ print(score..'/'..score_max, 1 + offset_x, 122, 11)
 end
 
 function draw_entities(p, entities)
-spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
-
 for e in all(entities) do
 if (e.entity_type == 'torch') then
 spr(e.base_anim.f, e.x, e.y, 2, 2)
@@ -111,6 +109,7 @@ elseif e.entity_type == 'bad' then
 spr(e.base_anim.f, e.x, e.y, 1, 1, (e.facing == 0))
 end
 end
+spr(p.base_anim.f, p.x, p.y, 1, 1, (p.facing == 0))
 end
 
 function draw_shots(shots)
@@ -912,5 +911,9 @@ __music__
 00 00000000
 00 00000000
 00 00000000
+
+
+
+
 
 
