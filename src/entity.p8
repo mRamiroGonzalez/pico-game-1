@@ -73,11 +73,15 @@ function load_ennemies(loaded_map, entities, spawns)
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 130) then
         -- mimic
-        add(entities, init_entity(xi*8, yi*8, 1, 37, 4,'bad','endless', 1, facing))
+        add(entities, init_entity(xi*8, yi*8, 1, 36, 4,'bad','endless', 1, facing))
         mset(xi, yi, 80)
       elseif(mget(xi, yi) == 131) then
         -- small zombie
-        add(entities, init_entity(xi*8, yi*8, 2, 53, 4,'bad','endless', 1, facing))
+        add(entities, init_entity(xi*8, yi*8, 2, 52, 4,'bad','endless', 1, facing))
+        mset(xi, yi, 80)
+      elseif(mget(xi, yi) == 132) then
+        -- yeti
+        add(entities, init_entity(xi*8, yi*8, 1, 40, 4,'bad','endless', 1, facing))
         mset(xi, yi, 80)
       end
     end
@@ -88,9 +92,10 @@ function create_random_entities(spawns)
   local tile = get_random_tile_from_table(spawns)
 
   if(counter % 100 == 0)then
-    ennemy = 128 + flr(rnd(4))
-    mset(tile,0,ennemy)
-    sfx(1)
+    -- ennemy = 128 + flr(rnd(5))
+    -- mset(tile,0,ennemy)
+    -- sfx(1)
+    mset(tile, 0, 132)
   end
 end
 
