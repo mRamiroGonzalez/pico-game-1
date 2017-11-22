@@ -69,7 +69,10 @@ end
 
 function shot_control(p)
   if (btnp(4)) then
-    add(shots, init_entity(p.x, p.y, 4, 26, 1, 'shot', 'simple', 1, p.facing))
-    sfx(3)
+    if(p.shot_timer == 0) then
+      add(shots, init_entity(p.x, p.y, 4, 26, 1, 'shot', 'simple', 1, p.facing))
+      p.shot_timer = 5
+      sfx(3)
+    end
   end
 end

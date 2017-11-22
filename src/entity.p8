@@ -92,10 +92,9 @@ function create_random_entities(spawns)
   local tile = get_random_tile_from_table(spawns)
 
   if(counter % 100 == 0)then
-    -- ennemy = 128 + flr(rnd(5))
-    -- mset(tile,0,ennemy)
-    -- sfx(1)
-    mset(tile, 0, 132)
+    ennemy = 128 + flr(rnd(5))
+    mset(tile,0,ennemy)
+    sfx(1)
   end
 end
 
@@ -122,6 +121,7 @@ function init_entity(start_x, start_y, speed, start_sprite, length_sprites, t, a
     gravity = 1,
     life = life,
     shield = 0,
+    shot_timer = 0,
     base_anim={f=start_sprite, st=start_sprite, sz=start_sprite+length_sprites, fix=start_sprite}
   }
 end

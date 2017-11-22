@@ -33,6 +33,7 @@ function _update()
 
   if (score >= current_level.max_score) next_level()
   if (p.shield > 0) p.shield -= 1
+  if (p.shot_timer > 0) p.shot_timer -= 1
 
   load_ennemies(loaded_map(p, map_offset), entities, spawn_tab)
 
